@@ -25,31 +25,31 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 subjects: group of 30 volunteers within an age bracket of 19-48 years, numbered from 1 to 30\
 \
 Files that were read in to the R script and analysed:\
-- 'activity_labels.txt':               Links the class labels with their activity name.\
-\
-- 'train/X_train.txt': Training set.\
-\
-- 'train/y_train.txt': Training labels.\
-\
-- 'test/X_test.txt': Test set.\
-\
-- 'test/y_test.txt': Test labels.\
-\
+- 'activity_labels.txt':   Links the class labels with their activity name.   loaded in R as     activity_labels\
+- 'X_train.txt': 		Training set.    				loaded in R as df_train\
+- 'y_train.txt': 		Training labels.				loaded in R as activity_train\
+- 'X_test.txt': 		Test set.					loaded in R as df_test\
+- 'y_test.txt': 		Test labels.					loaded in R as activity_test\
+- 'features.txt'		Variable names / 561 Measures		loaded in R as features_labels\
+- 'subject_train.txt' Each row identifies the subject of the training group who performed the activity for each window sample. \
+		Its range is from 1 to 30.   				loaded in R as subject_train\
+- 'subject_test.txt' Each row identifies the subject of the test group who performed the activity for each window sample. \
+		Its range is from 1 to 30.   				loaded in R as subject_test\
 \
 Link: {\field{\*\fldinst{HYPERLINK "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"}}{\fldrslt \cf2 \ul \ulc2 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip}}\cf2 \ul \ulc2 \
 \pard\pardeftab720
 \cf0 \ulnone \
 Source of data: \
-\pard\pardeftab720
-\cf0 Jorge L. Reyes-Ortiz(1,2), Davide Anguita(1), Alessandro Ghio(1), Luca Oneto(1) and Xavier Parra(2)\
+Jorge L. Reyes-Ortiz(1,2), Davide Anguita(1), Alessandro Ghio(1), Luca Oneto(1) and Xavier Parra(2)\
 1 - Smartlab - Non-Linear Complex Systems Laboratory DITEN - Universit\'e0 degli Studi di Genova, Genoa (I-16145), Italy. \
 2 - CETpD - Technical Research Centre for Dependency Care and Autonomous Living   Universitat Polit\'e8cnica de Catalunya (BarcelonaTech). Vilanova i la Geltr\'fa (08800), Spain    activityrecognition '@' smartlab.ws
 \f0 \
 \
+\
+\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 Task:\
 *******\
-\
 \pard\tx220\tx720\pardeftab720\li720\fi-720
 \ls1\ilvl0
 \f1 \cf0 {\listtext	1.	}Merges the training and the test sets to create one data set.\
@@ -59,9 +59,30 @@ Source of data: \
 {\listtext	5.	}From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.\
 \pard\tx566\pardeftab720
 \cf0 \
-Variables in the R script:\
-*******\
 \
+\
+What the script does  /  Variables in the R script:\
+******************************************\
+all txt files mentioned above were read in as data frames\
+in case one of the files is not in the working directory the flag "AllFilesThere" is set to FALSE and  the script does and returns nothing\
+Lines 30-34: if all files could be loaded, one column with the activity number and one column with the subject \
+			number is added to the dataframes with the measured data (df_test and df_train)\
+Lines 38 ff: STEP 1 of the task list:    the training and test dataframe are merged to df_merged\
+						variables are deleted to clean up workspace\
+Lines 43 ff: STEP 4 of the task list:   the names of the variables in freatures_labels from features.txt are made unique \
+						(there were some doubles in the txt file!)\
+						the periods in the names are removed --> generates "valid_features_labels"\
+Line 47				the names of the 2 added columns "activity" and "subject" are added to valid_features_labels  \
+Line 48				the merged dataframe gets column names\
+\
+Line 52  STEP 2		extract from df_merged only the columns whose names contain mean or std\
+\
+Lines 58 ff:	STEP 3	replace activity numbers in column "activity" with descriptive activity names from activity_labels.txt\
+					this is admittedly done not in the most elegant way\
+Line 70 ff:   STEP 5		produce tidy dataset by transforming all the feature columns in one long column, \
+					grouping by subject, activity and freature\
+					calculate mean for each group\
+L 75:					safe df_tidy as tidy_dataset.txt\
 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
