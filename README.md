@@ -23,18 +23,17 @@
       + if all files could be loaded, one column with the activity number and one column with the subject 
       + number is added to the dataframes with the measured data (df_test and df_train)
 * Lines 38 ff: STEP 1 of the task list:  
-      +  the training and test dataframe are merged to df_merged
-	+	variables are deleted to clean up workspace
+      + the training and test dataframe are merged to df_merged
+	+ variables are deleted to clean up workspace
 * Lines 43 ff: STEP 4 of the task list:  
-      + the names of the variables in freatures_labels from features.txt are made unique 
-	+	(there were some doubles in the txt file!)
-	+	the periods in the names are removed --> generates "valid_features_labels"
+      + the names of the variables in freatures_labels from features.txt are made unique (there were some doubles in the txt file!)
+	+ the periods in the names are removed --> generates "valid_features_labels"
 * Line 47	the names of the 2 added columns "activity" and "subject" are added to valid_features_labels  
 * Line 48		the merged dataframe gets column names
 
-* Line 52  STEP 2		extract from df_merged only the columns whose names contain mean or std
+* Line 52  STEP 2:		extract from df_merged only the columns whose names contain mean or std
 
-* Lines 58 ff:	STEP 3	
+* Lines 58 ff   STEP 3	
       + replace activity numbers in column "activity" with descriptive activity names from activity_labels.txt
       + this is admittedly done not in the most elegant way
 * Line 70 ff:   STEP 5		
